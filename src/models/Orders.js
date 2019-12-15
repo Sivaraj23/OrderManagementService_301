@@ -1,8 +1,7 @@
-import mongoose from "@db/connection";
+import mongoose from "../db/connection";
 import ORDER_STATUS from "../config/contants";
 import postHook from "../routes/orders/services/postHook";
 import preHook from "../routes/orders/services/preHook";
-var uniqid = require('uniqid');
 
 
 const Schema = mongoose.Schema;

@@ -9,8 +9,9 @@ var winston = require('./utilities/Logger');
 var morgan = require('morgan');
 
 var indexRouter = require('./routes/index');
+try{
 var ordersRouter = require('./routes/orders/orders');
-
+}catch(err){console.log(err)}
 var app = express();
 
 

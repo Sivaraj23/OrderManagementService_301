@@ -3,11 +3,12 @@
 /**
  * Module dependencies.
  */
-var app = require('../app');
+
+var app = require('./app');
 var debug = require('debug')('ordermanagement:server');
 var http = require('http');
 
-var logger=require("../utilities/Logger")
+var logger=require("./utilities/Logger")
 
 
 /**
@@ -15,6 +16,8 @@ var logger=require("../utilities/Logger")
  */
 
 var port = normalizePort(process.env.PORT || '3000');
+var IP_ADDRESS = normalizePort(process.env.IP_ADDRESS || '127.0.0.1');
+
 app.set('port', port);
 
 /**
@@ -27,10 +30,9 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port,IP_ADDRESS);
 server.on('error', onError);
 server.on('listening', onListening);
-
 /**
  * Normalize a port into a number, string, or false.
  */
