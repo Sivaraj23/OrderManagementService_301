@@ -34,7 +34,7 @@ consul.acl.bootstrap(function(err, result) {
    
   
 
-  const PORT = Number(process.env.PORT) || 3001;
+  const PORT = +process.env.PORT || 3001;
   const IP_ADDRESS = process.env.IP_ADDRESS  || 'localhost';
   
    
