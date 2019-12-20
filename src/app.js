@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var winston = require('./utilities/Logger');
 
 var morgan = require('morgan');
+var sendOrderDetails=require("./utilities/producer")
 
 var indexRouter = require('./routes/index');
 try{

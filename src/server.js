@@ -10,7 +10,7 @@ var http = require('http');
 
 var logger=require("./utilities/Logger")
 
-
+var consul=require("../consul.js")
 /**
  * Get port from environment and store in Express.
  */
@@ -33,6 +33,7 @@ var server = http.createServer(app);
 server.listen(port,IP_ADDRESS);
 server.on('error', onError);
 server.on('listening', onListening);
+
 /**
  * Normalize a port into a number, string, or false.
  */
