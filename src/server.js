@@ -3,8 +3,11 @@
 /**
  * Module dependencies.
  */
-
+try{
 var app = require('./app');
+
+
+}catch(err){console.log(err)}
 var debug = require('debug')('ordermanagement:server');
 var http = require('http');
 

@@ -8,13 +8,13 @@ import getAllOrdersByResIds from './controllers/getAllOrdersByResIds';
 import ValidationService from "./services/validationService"
 import getTotalAmountOnGivenDate from './controllers/getTotalAmountOnGivenDate';
 import OrderService from './services/orderService';
-
+var auth=require("../../config/auth")
 var router = express.Router();
 
 
 
 router.route('/createOrder')
-    .post(ValidationService.validateOrderCreation, createOrder)
+    .post(auth.gitHubAuthVerify,ValidationService.validateOrderCreation, createOrder)//only authenticated user can create order
     .get(OrderService.getNotSupported)
     .put(OrderService.putNotSupported)
     .patch(OrderService.postNotSupported);
@@ -23,7 +23,7 @@ router.route('/createOrder')
 router.route('/updateOrder')
     .get(OrderService.getNotSupported)
     .post(OrderService.postNotSupported)
-    .put(ValidationService.validateOrderUpdate, updateOrder)
+    .put(auth.gitHubAuthVerify,ValidationService.validateOrderUpdate, updateOrder)
     .patch(OrderService.postNotSupported);
 
 
@@ -31,7 +31,7 @@ router.route('/cancelOrder')
     .get(OrderService.getNotSupported)
     .put(OrderService.putNotSupported)
     .post(OrderService.postNotSupported)
-    .patch(ValidationService.validateOrderCancel, cancelOrder);
+    .patch(auth.gitHubAuthVerify,ValidationService.validateOrderCancel, cancelOrder);
 
 
 router.route('/getAllOrders/:userId')

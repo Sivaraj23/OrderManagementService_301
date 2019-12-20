@@ -4,16 +4,19 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var session = require('express-session');
 var winston = require('./utilities/Logger');
-
+var passport=require("passport")
 var morgan = require('morgan');
 var sendOrderDetails=require("./utilities/producer")
+var auth = require('./config/auth')
+// var indexRouter = require('./routes/index');
 
-var indexRouter = require('./routes/index');
-try{
 var ordersRouter = require('./routes/orders/orders');
 var usersRouter = require('./routes/users/users');
-}catch(err){console.log(err)}
+
+
+
 var app = express();
 
 
@@ -30,9 +33,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(bodyParser.json());
 
-app.use('/', indexRouter);
+app.use(session({ secret: 'MysecretPassword', resave: false, saveUninitialized: false }));
+app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
+app.get('/',auth.gitHubAuthVerify, function(req, res){
+  res.render('index', { title: "OrderAPI" });
+});
+
+// app.use('/', indexRouter);
 app.use('/api/orders',ordersRouter);
 app.use('/api/users',usersRouter);
 
@@ -53,5 +70,10 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+// function ensureAuthenticated(req, res, next) {
+//   if (req.isAuthenticated()) { return next(); }
+//   res.redirect('/login')
+// }
+
 
 module.exports = app;
