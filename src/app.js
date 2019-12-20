@@ -11,6 +11,7 @@ var morgan = require('morgan');
 var indexRouter = require('./routes/index');
 try{
 var ordersRouter = require('./routes/orders/orders');
+var usersRouter = require('./routes/users/users');
 }catch(err){console.log(err)}
 var app = express();
 
@@ -32,6 +33,8 @@ app.use(bodyParser.json());
 
 app.use('/', indexRouter);
 app.use('/api/orders',ordersRouter);
+app.use('/api/users',usersRouter);
+
 
 
 // catch 404 and forward to error handler
