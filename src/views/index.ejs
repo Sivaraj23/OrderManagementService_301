@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <%- include ('head',{title : page}) %> 
+</head>
+<body>
+ <%- include ('menu',{githubURL : url,avatar : avatar}) %>
+ <h1>Welcome <%= user %></h1>
+<div class="container-fluid bg-3 text-center">    
+  <h3><%= page %></h3><br> 
+  <div class="row">
+    <div class="col">
+      <p>Hola !!! Now you are authenticated to access the Order APIs</p>
+      
+    </div>
+
+  </div>
+</div>
+</body>
+ <%- include  ('script') %> 
+</html>
+
+<!--index page holding all the content-->

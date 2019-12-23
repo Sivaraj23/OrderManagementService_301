@@ -8,7 +8,6 @@ var session = require('express-session');
 var winston = require('./utilities/Logger');
 var passport=require("passport")
 var morgan = require('morgan');
-var sendOrderDetails=require("./utilities/producer")
 var auth = require('./config/auth')
 // var indexRouter = require('./routes/index');
 
@@ -22,7 +21,7 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 // app.use(logger('dev'));
 app.use(morgan('combined', { stream: winston.stream }));
@@ -41,12 +40,17 @@ app.use(passport.session());
 
 
 app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
+  console.log("Logging out")
+  req.session.destroy(function(e){
+    req.logout();
+    res.redirect('/');
+});
+  // req.logout();
+  // res.redirect('/');
 });
 
 app.get('/',auth.gitHubAuthVerify, function(req, res){
-  res.render('index', { title: "OrderAPI" });
+  res.render('index', { page: "OrderAPI",user : req.user.username ,url : req.user.profileUrl,avatar :req.user._json.avatar_url });
 });
 
 // app.use('/', indexRouter);
@@ -70,10 +74,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-// function ensureAuthenticated(req, res, next) {
-//   if (req.isAuthenticated()) { return next(); }
-//   res.redirect('/login')
-// }
 
 
 module.exports = app;
+
