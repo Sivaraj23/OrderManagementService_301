@@ -1,9 +1,14 @@
 module.exports = {
-    apps : [{
-      name        : "app",
+      apps : [{
+
+      name        : "order",
+
       script      : "./dist/server.js",
+
       watch       : true,
-      exec_mode : "cluster",
-      instances : 3
-    }]
-  }
+
+      env : {
+
+        PORT : 3003
+   }}] 
+ }

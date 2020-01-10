@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon ./src/server --exec babel-node",
     "build": "babel ./src --out-dir ./dist ",
-     "test": "mocha --require @babel/register './src/test/**spec.js'"
+    "test": "mocha --require @babel/register './src/test/**spec.js'"
   },
   "dependencies": {
     "@babel/cli": "^7.7.5",
