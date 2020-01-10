@@ -1,4 +1,3 @@
-//  var consul = require('consul')();
 var Bluebird = require('bluebird');
 
 function fromCallback(fn) {

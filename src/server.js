@@ -13,7 +13,7 @@ var http = require('http');
 
 var logger=require("./utilities/Logger")
 
-var consul=require("../consul.js")
+var consul=require("../src/config/consul")
 /**
  * Get port from environment and store in Express.
  */
