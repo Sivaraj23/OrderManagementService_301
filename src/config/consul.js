@@ -1,4 +1,5 @@
 var Bluebird = require('bluebird');
+require('dotenv').config()
 
 function fromCallback(fn) {
     return new Bluebird(function(resolve, reject) {
@@ -16,7 +17,7 @@ function fromCallback(fn) {
     });
   }
 var consul = require('consul')({ promisify: fromCallback,
-host : '172.19.57.162' });
+host : process.env.CONSUL_IP });
 
 
 consul.acl.bootstrap(function(err, result) {

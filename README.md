@@ -79,7 +79,7 @@ env
 ```
 #### To run Order Management  server
 ```
-docker run -e MONGO_IP="<MONGO_DB_IP>" -e MONGO_PORT="<MONGO_DB_PORT>" -it -d -p <HOST_PORT>:<CONTAINER:PORT> orderserver
+docker run -e MONGO_IP="<MONGO_DB_IP>"  -e CONSUL_IP="<CONSUL_IP>" -e MONGO_PORT="<MONGO_DB_PORT>" -it -d -p <HOST_PORT>:<CONTAINER:PORT> orderserver
 ```
 
 
