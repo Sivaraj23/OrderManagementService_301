@@ -13,12 +13,12 @@ var http = require('http');
 
 var logger=require("./utilities/Logger")
 
-var consul=require("../src/config/consul")
+var consul=require("./config/consul")
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '3002');
 var IP_ADDRESS = normalizePort(process.env.IP_ADDRESS || '127.0.0.1');
 
 app.set('port', port);
