@@ -11,7 +11,7 @@ Please install following softwares before pulling the project.
 
  1,Node JS\
  2,MongoDB (running as a service)\
- 3,Docker\
+ 3,Docker
 
 ### Installing for Dev
 
