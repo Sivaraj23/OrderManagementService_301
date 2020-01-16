@@ -33,21 +33,23 @@ const OrderService = {
   updateOrder: async obj => {
     const { orderId, user, restaurant, orderItems } = obj;
     const orderToUpdate = await Order.findOne({ user: user, orderId: orderId });
-    orderToUpdate.restaurant = restaurant;
-    orderToUpdate.orderItems = orderItems;
-    orderToUpdate.lastModifiedTime = moment(
-      orderToUpdate.lastModifiedTime
-    ).subtract(2, "hours");
+
     if (
-      moment(orderToUpdate.lastModifiedTime).diff(moment().format(), "hours") *
+      moment(orderToUpdate.lastModifiedTime).diff(
+        moment().format(),
+        "minutes"
+      ) *
         -1 <
-      1
+      59
     ) {
+      orderToUpdate.restaurant = restaurant;
+      orderToUpdate.orderItems = orderItems;
+      orderToUpdate.lastModifiedTime = moment().format();
       return await orderToUpdate.save().then(err => {
         return err;
       });
     } else {
-      throw new Error("you cant modify a order after an hour");
+      return "you cant modify a order after an hour";
     }
   },
   getAllOrders: async (obj, query) => {

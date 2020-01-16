@@ -3,56 +3,56 @@ import ORDER_STATUS from "../config/contants";
 import postHook from "../routes/orders/services/postHook";
 import preHook from "../routes/orders/services/preHook";
 
-
 const Schema = mongoose.Schema;
 
 //Schema Def
-const OrderSchema = new Schema({
-
+const OrderSchema = new Schema(
+  {
     orderId: {
-        type: Number,
-        unique: true,
-        default: ()=>
-        {
-            return Date.now()
-        }
+      type: Number,
+      unique: true,
+      default: () => {
+        return Date.now();
+      }
     },
     user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "users",
-        required: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      required: true
     },
     restaurant: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true
+      type: mongoose.Schema.Types.ObjectId,
+      required: true
     },
-    orderItems: [{
+    orderItems: [
+      {
         foodItem: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "foodItems",
-            required: true
+          type: mongoose.Schema.Types.ObjectId,
+          required: true
         },
         quantity: {
-            type: Number
+          type: Number
         }
-    }],
+      }
+    ],
     lastModifiedTime: {
-        type: Date,
-        default: Date.now()
+      type: Date,
+      default: Date.now()
     },
     orderStatus: {
-        type: String,
-        required: true,
-        default: ORDER_STATUS.ORDERED
+      type: String,
+      required: true,
+      default: ORDER_STATUS.ORDERED
     },
-    totalPrice :{
-        type: Number
+    totalPrice: {
+      type: Number
     }
-}, { strict: true })
+  },
+  { strict: true }
+);
 
-OrderSchema.pre('save',preHook);
-OrderSchema.post('save', postHook);
-
+OrderSchema.pre("save", preHook);
+OrderSchema.post("save", postHook);
 
 const Order = mongoose.model("orders", OrderSchema);
 export default Order;
